@@ -63,7 +63,7 @@
 #define FTS_REPORT_PRESSURE_EN                  0
 #define FTS_FORCE_TOUCH_EN                      0
 #define FTS_GESTURE_EN                          1
-#define FTS_ESDCHECK_EN                         1
+#define FTS_ESDCHECK_EN                         0
 #define FTS_TEST_EN                             0
 #define FTS_GLOVE_EN                            0
 #define FTS_COVER_EN                            0
