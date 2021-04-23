@@ -16,6 +16,7 @@
 
 #include "common-audio.dtsi"
 #include "common-battery.dtsi"
+#include "common-camera.dtsi"
 #include "common-mdss.dtsi"
 #include "common-misc.dtsi"
 #include "common-mtp.dtsi"

@@ -20,7 +20,6 @@
 #include "msm8917-audio.dtsi"
 #include "msm8953-wsa881x.dtsi"
 #include "ulysse-common/common.dtsi"
-#include "ugglite/ugglite-msm8917.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. MSM8917-PMI8937 MTP";
