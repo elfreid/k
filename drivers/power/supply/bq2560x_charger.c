@@ -2113,6 +2113,7 @@ static irqreturn_t bq2560x_charger_interrupt(int irq, void *dev_id)
 	    if(bq->usb_present) {
 			bq->usb_present = false;
 			extcon_set_cable_state_(bq->extcon, EXTCON_USB, false);
+			bq2560x_request_dpdm(bq, false);
 		}
 
 		if (bq->software_jeita_supported) {
@@ -2134,6 +2135,11 @@ static irqreturn_t bq2560x_charger_interrupt(int irq, void *dev_id)
 				|| bq->usb_supply_type == POWER_SUPPLY_TYPE_USB_DCP) {
 			val.intval = true;
 			extcon_set_property(bq->extcon, EXTCON_USB, EXTCON_PROP_USB_SS, val);
+		}
+		if (bq->usb_supply_type == POWER_SUPPLY_TYPE_USB) {
+			bq2560x_request_dpdm(bq, false);
+			msleep(50);
+			bq2560x_request_dpdm(bq, true);
 		}
 		extcon_set_cable_state_(bq->extcon, EXTCON_USB, true);
 		bq2560x_request_dpdm(bq, true);
@@ -2168,11 +2174,12 @@ static void determine_initial_status(struct bq2560x *bq)
 	if (!ret)
 		bq->in_hiz = !!status;
 
+	bq2560x_charger_interrupt(bq->client->irq, bq);
+
 	if (bq->usb_present) {
+		msleep(50);
 		bq2560x_request_dpdm(bq, true);
 	}
-
-	bq2560x_charger_interrupt(bq->client->irq, bq);
 }
 
 
