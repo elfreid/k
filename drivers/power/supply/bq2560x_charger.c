@@ -2118,7 +2118,6 @@ static irqreturn_t bq2560x_charger_interrupt(int irq, void *dev_id)
 	    if(bq->usb_present) {
 			bq->usb_present = false;
 			extcon_set_cable_state_(bq->extcon, EXTCON_USB, false);
-			bq2560x_request_dpdm(bq, false);
 		}
 
 		if (bq->software_jeita_supported) {
